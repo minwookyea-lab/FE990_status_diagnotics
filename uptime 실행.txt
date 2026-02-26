@@ -1,0 +1,1 @@
+python .\cli_tool.py --action uptime --port $env:FE990_PORT --cmd $env:FE990_UPTIME_CMD

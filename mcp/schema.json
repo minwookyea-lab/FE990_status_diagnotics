@@ -1,0 +1,33 @@
+
+{
+  "tool_name": "power",
+  "version": "0.1.0",
+  "commands": [
+    {
+      "name": "uptime",
+      "description": "모듈 uptime 조회 (AT 경로)",
+      "exec": "python ../at_agent.py --action uptime --port {{port}} --baud {{baud}}",
+      "params": {
+        "port": "str",
+        "baud": "int"
+      },
+      "safety": {
+        "confirm": false,
+        "cooldown_sec": 0
+      }
+    },
+    {
+      "name": "reboot",
+      "description": "모듈 재부팅 (AT 경로)",
+      "exec": "python ../at_reboot.py --port {{port}} --baud {{baud}}",
+      "params": {
+        "port": "str",
+        "baud": "int"
+      },
+      "safety": {
+        "confirm": true,
+        "cooldown_sec": 30
+      }
+    }
+  ]
+}

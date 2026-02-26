@@ -1,0 +1,58 @@
+
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FE990 Uptime Service",
+    "version": "1.0.0",
+    "description": "Returns device uptime via local FE990 AT service."
+  },
+  "servers": [
+    { "url": "http://localhost:8080" }
+  ],
+  "paths": {
+    "/uptime": {
+      "get": {
+        "operationId": "getFe990Uptime",
+        "summary": "Get FE990 uptime",
+        "description": "Returns formatted uptime and seconds for FE990 device. Default port is COM9. You may override with ?port=COMxx.",
+        "parameters": [
+          {
+            "name": "port",
+            "in": "query",
+            "description": "Override serial port (e.g., COM33). Default is COM9 if omitted.",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uptime",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "message": { "type": "string" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ok": { "type": "boolean" },
+                        "port": { "type": "string" },
+                        "baud": { "type": "integer" },
+                        "seconds": { "type": "integer" },
+                        "formatted": { "type": "string" }
+                      },
+                      "required": ["ok", "port", "seconds", "formatted"]
+                    }
+                  },
+                  "required": ["ok", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
